@@ -12,5 +12,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/aima-core"/>
 	<classpathentry kind="lib" path="lib/commons-compress-1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX14"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Javafx 14"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
