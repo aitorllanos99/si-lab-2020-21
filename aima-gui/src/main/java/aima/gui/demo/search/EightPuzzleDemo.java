@@ -55,6 +55,8 @@ public class EightPuzzleDemo {
 		eightPuzzleAStarNullHeristicDemo(); //h0
 		eightPuzzleAStarWeigthedMisplaceDemo();//h1
 		eightPuzzleAStarWeightedManhattanDemo();//h2
+		eightPuzzleAStarNonConsistentHeuristicDemo(); //h3
+		eightPuzzleAStarWeigthedNonConsistentHeuristicDemo(); //h3-2
 	}
 	
 	private static void eightPuzzleAStarNullHeristicDemo() {
@@ -91,6 +93,35 @@ public class EightPuzzleDemo {
 			Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(random1);
 			SearchForActions<EightPuzzleBoard, Action> search = new AStarSearch<>(new GraphSearch<>(),
 					EightPuzzleFunctions::getWeightedManhattanDistance);
+			SearchAgent<Object, EightPuzzleBoard, Action> agent = new SearchAgent<>(problem, search);
+			printActions(agent.getActions());
+			printInstrumentation(agent.getInstrumentation());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	private static void eightPuzzleAStarNonConsistentHeuristicDemo() {
+		System.out.println("\nEightPuzzleDemo AStar Search (ManhattanHeursitic)");
+		try {
+			Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(random1);
+			SearchForActions<EightPuzzleBoard, Action> search = new AStarSearch<>(new GraphSearch<>(),
+					EightPuzzleFunctions::nonConsistentHeuristic);
+			SearchAgent<Object, EightPuzzleBoard, Action> agent = new SearchAgent<>(problem, search);
+			printActions(agent.getActions());
+			printInstrumentation(agent.getInstrumentation());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void eightPuzzleAStarWeigthedNonConsistentHeuristicDemo() {
+		System.out.println("\nEightPuzzleDemo AStar Search (ManhattanHeursitic)");
+		try {
+			Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(random1);
+			SearchForActions<EightPuzzleBoard, Action> search = new AStarSearch<>(new GraphSearch<>(),
+					EightPuzzleFunctions::weigthedNonConsistentHeuristic);
 			SearchAgent<Object, EightPuzzleBoard, Action> agent = new SearchAgent<>(problem, search);
 			printActions(agent.getActions());
 			printInstrumentation(agent.getInstrumentation());
