@@ -81,7 +81,8 @@ public class GraphSearch<S, A> extends TreeSearch<S, A> {
 			if(node.getPathCost() < exploredNode.getPathCost()) {
 				explored.remove(node.getState());
 				frontier.add(node);
-				System.out.println(" - Node reinserted in frontier - ");
+				//System.out.println(" - Node reinserted in frontier - ");
+				metrics.incrementInt(METRIC_NODES_EXPANDED_REINSERTED_IN_FRONTIER); //Ejercicio 5
 			}
 		}
 		
@@ -120,7 +121,9 @@ public class GraphSearch<S, A> extends TreeSearch<S, A> {
 	 * of the frontier.
 	 */
 	private void cleanUpFrontier() {
-		while (!frontier.isEmpty() && explored.containsKey(frontier.element().getState()))
+		while (!frontier.isEmpty() && explored.containsKey(frontier.element().getState())) {
 			frontier.remove();
+			metrics.incrementInt(METRIC_NODES_RECTIFIED_DUPLICATED_IN_FRONTIER); //Ejercicio 5
+		}
 	}
 }
