@@ -113,7 +113,7 @@ public class EightPuzzleFunctions {
 	}
 	
 	public static double getEpsilonWeightedManhattanDistance(Node<EightPuzzleBoard, Action> node){
-		double epsilon = 0.1; //>=0
+		double epsilon = 0.5; //>=0
 		return getWeightedManhattanDistance(node) * (1+epsilon);
 	}
 	

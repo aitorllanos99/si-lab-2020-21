@@ -30,13 +30,17 @@ public class EightPuzzleDemo {
 //	private static EightPuzzleBoard extreme =
 //			new EightPuzzleBoard(new int[] { 0, 8, 7, 6, 5, 4, 3, 2, 1 });
 
-	private static EightPuzzleBoard initial = new EightPuzzleBoard(new int[] { 1, 4, 2, 7, 5, 8, 3, 0, 6 });
-	// new EightPuzzleBoard(new int[] { 1, 2, 5, 3, 4, 0, 6, 7, 8 });
-	// new EightPuzzleBoard(new int[] { 0, 8, 7, 6, 5, 4, 3, 2, 1 });
+	private static EightPuzzleBoard initial = 
+		//	new EightPuzzleBoard(new int[] { 1, 4, 2, 7, 5, 8, 3, 0, 6 });
+	 //new EightPuzzleBoard(new int[] { 1, 2, 5, 3, 4, 0, 6, 7, 8 });
+	 //new EightPuzzleBoard(new int[] { 0, 8, 7, 6, 5, 4, 3, 2, 1 });
 
 	// 20 Movimientos
 	// new EightPuzzleBoard(new int[] { 6,2,7,4,5,1,0,8,3 });
-	
+	// new EightPuzzleBoard(new int[] {4,7,2,1,0,6,3,5,8});
+	//new EightPuzzleBoard(new int[] {7,1,5,4,0,8,2,6,3});
+	//new EightPuzzleBoard(new int[] {5,1,6,4,0,3,8,7,2});
+	 new EightPuzzleBoard(new int[] {2,4,0,6,3,1,7,8,5});
 
 	// 30 Movimientos
 	// new EightPuzzleBoard(new int[] { 5,6,7,2,8,4,0,3,1 });
@@ -53,10 +57,10 @@ public class EightPuzzleDemo {
 
 		// Practica 2:
 		eightPuzzleAStarNullHeristicDemo(); //h0
-		eightPuzzleAStarWeigthedMisplaceDemo();//h1
-		eightPuzzleAStarWeightedManhattanDemo();//h2
-		eightPuzzleAStarNonConsistentHeuristicDemo(); //h3
-		eightPuzzleAStarWeigthedNonConsistentHeuristicDemo(); //h3-2
+	//eightPuzzleAStarWeigthedMisplaceDemo();//h1
+	//eightPuzzleAStarWeightedManhattanDemo();//h2
+		//eightPuzzleAStarNonConsistentHeuristicDemo(); //h3
+		//eightPuzzleAStarWeigthedNonConsistentHeuristicDemo(); //h3-2
 		eightPuzzleAStarEpsilonWeightedManhattanDistanceDemo(); //h4
 	}
 	
