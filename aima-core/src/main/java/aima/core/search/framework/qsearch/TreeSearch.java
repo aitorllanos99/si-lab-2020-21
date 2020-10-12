@@ -1,6 +1,5 @@
 package aima.core.search.framework.qsearch;
 
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.Queue;
 
@@ -75,6 +74,8 @@ public class TreeSearch<S, A> extends QueueSearch<S, A> {
 		while (!isFrontierEmpty() && !Tasks.currIsCancelled()) {
 			// choose a leaf node and remove it from the frontier
 			Node<S, A> node = removeFromFrontier();
+			if(evalFn != null)
+				System.out.println("f-value: " + evalFn.applyAsDouble(node)); //Ejercicio 4
 			// if the node contains a goal state then return the corresponding solution
 			if (!earlyGoalTest && problem.testSolution(node))
 				return asOptional(node);

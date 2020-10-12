@@ -1,10 +1,8 @@
 package aima.core.search.framework.qsearch;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Queue;
-import java.util.Set;
 
 import aima.core.search.framework.Node;
 import aima.core.search.framework.NodeFactory;
@@ -101,7 +99,7 @@ public class GraphSearch<S, A> extends TreeSearch<S, A> {
 	protected Node<S, A> removeFromFrontier() {
 		cleanUpFrontier(); // not really necessary because isFrontierEmpty should be called before...
 		Node<S, A> result = frontier.remove();
-		explored.add(result.getState());
+		explored.put(result.getState(), result);
 		updateMetrics(frontier.size());
 		return result;
 	}
@@ -122,7 +120,7 @@ public class GraphSearch<S, A> extends TreeSearch<S, A> {
 	 * of the frontier.
 	 */
 	private void cleanUpFrontier() {
-		while (!frontier.isEmpty() && explored.contains(frontier.element().getState()))
+		while (!frontier.isEmpty() && explored.containsKey(frontier.element().getState()))
 			frontier.remove();
 	}
 }

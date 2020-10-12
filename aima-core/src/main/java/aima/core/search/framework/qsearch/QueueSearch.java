@@ -1,12 +1,13 @@
 package aima.core.search.framework.qsearch;
 
+import java.util.Optional;
+import java.util.Queue;
+
 import aima.core.search.framework.Metrics;
 import aima.core.search.framework.Node;
 import aima.core.search.framework.NodeFactory;
 import aima.core.search.framework.problem.Problem;
-
-import java.util.Optional;
-import java.util.Queue;
+import aima.core.search.informed.EvaluationFunction;
 
 /**
  * Base class for queue-based search implementations, especially for 
@@ -31,7 +32,7 @@ public abstract class QueueSearch<S, A> {
 	final protected NodeFactory<S, A> nodeFactory;
 	protected boolean earlyGoalTest = false;
 	protected Metrics metrics = new Metrics();
-
+	public EvaluationFunction<S,A> evalFn; //Ejercicio 4
 	/** Stores the provided node expander and adds a node listener to it. */
 	protected QueueSearch(NodeFactory<S, A> nodeFactory) {
 		this.nodeFactory = nodeFactory;

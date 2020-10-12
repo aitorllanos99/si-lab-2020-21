@@ -146,5 +146,6 @@ public class EightPuzzleDemo {
 
 	private static void printActions(List<Action> actions) {
 		actions.forEach(System.out::println);
+		System.out.println("Number of Actions: " + actions.size()); //Ejercicio 4
 	}
 }
