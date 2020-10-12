@@ -33,13 +33,13 @@ public class EightPuzzleDemo {
 
 	public static void main(String[] args) {
 		System.out.println("Initial State:\n" + boardWithThreeMoveSolution);
-		eightPuzzleDLSDemo();
-		eightPuzzleIDLSDemo();
-		eightPuzzleGreedyBestFirstDemo();
-		eightPuzzleGreedyBestFirstManhattanDemo();
+	//	eightPuzzleDLSDemo();
+	//	eightPuzzleIDLSDemo();
+	//	eightPuzzleGreedyBestFirstDemo();
+	//	eightPuzzleGreedyBestFirstManhattanDemo();
 		eightPuzzleAStarDemo();
-		eightPuzzleAStarManhattanDemo();
-		eightPuzzleSimulatedAnnealingDemo();
+		//eightPuzzleAStarManhattanDemo();
+		//eightPuzzleSimulatedAnnealingDemo();
 	}
 
 	private static void eightPuzzleDLSDemo() {
