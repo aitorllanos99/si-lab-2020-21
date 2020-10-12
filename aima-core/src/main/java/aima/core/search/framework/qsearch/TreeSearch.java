@@ -1,5 +1,7 @@
 package aima.core.search.framework.qsearch;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.Queue;
 
@@ -29,7 +31,8 @@ import aima.core.util.Tasks;
  * {@link #findNode(Problem, Queue)} from superclass {@link QueueSearch}.
  *
  * @param <S> The type used to represent states
- * @param <A> The type of the actions to be used to navigate through the state space
+ * @param <A> The type of the actions to be used to navigate through the state
+ *            space
  *
  * @author Ruediger Lunde
  * @author Ravi Mohan
@@ -47,24 +50,27 @@ public class TreeSearch<S, A> extends QueueSearch<S, A> {
 	}
 
 	/**
-	 * Receives a problem and a queue implementing the search strategy and
-	 * computes a node referencing a goal state, if such a state was found.
-	 * This template method provides a base for tree and graph search
-	 * implementations. It can be customized by overriding some primitive
-	 * operations, especially {@link #addToFrontier(Node)},
-	 * {@link #removeFromFrontier()}, and {@link #isFrontierEmpty()}.
+	 * Receives a problem and a queue implementing the search strategy and computes
+	 * a node referencing a goal state, if such a state was found. This template
+	 * method provides a base for tree and graph search implementations. It can be
+	 * customized by overriding some primitive operations, especially
+	 * {@link #addToFrontier(Node)}, {@link #removeFromFrontier()}, and
+	 * {@link #isFrontierEmpty()}.
 	 *
-	 * @param problem
-	 *            the search problem
-	 * @param frontier
-	 *            the data structure for nodes that are waiting to be expanded
+	 * @param problem  the search problem
+	 * @param frontier the data structure for nodes that are waiting to be expanded
 	 *
-	 * @return a node referencing a goal state, if the goal was found, otherwise empty;
+	 * @return a node referencing a goal state, if the goal was found, otherwise
+	 *         empty;
 	 */
 	@Override
 	public Optional<Node<S, A>> findNode(Problem<S, A> problem, Queue<Node<S, A>> frontier) {
 		this.frontier = frontier;
 		clearMetrics();
+		
+		Instant start = Instant.now(); //Ejercicio 6
+				
+		
 		// initialize the frontier using the initial state of the problem
 		Node<S, A> root = nodeFactory.createNode(problem.getInitialState());
 		addToFrontier(root);
@@ -74,18 +80,28 @@ public class TreeSearch<S, A> extends QueueSearch<S, A> {
 		while (!isFrontierEmpty() && !Tasks.currIsCancelled()) {
 			// choose a leaf node and remove it from the frontier
 			Node<S, A> node = removeFromFrontier();
+			if(evalFn != null)
+				System.out.println("f-value: " + evalFn.applyAsDouble(node)); //Ejercicio 4
 			// if the node contains a goal state then return the corresponding solution
-			if (!earlyGoalTest && problem.testSolution(node))
+			if (!earlyGoalTest && problem.testSolution(node)) {
+				Instant finish = Instant.now();//Ejercicio 6
+				metrics.set(METRIC_TIME_TAKEN, Duration.between(start, finish).toMillis());//Ejercicio 6
 				return asOptional(node);
+			}
 
 			// expand the chosen node and add the successor nodes to the frontier
 			for (Node<S, A> successor : nodeFactory.getSuccessors(node, problem)) {
 				addToFrontier(successor);
-				if (earlyGoalTest && problem.testSolution(successor))
+				if (earlyGoalTest && problem.testSolution(successor)) {
+					Instant finish = Instant.now(); //Ejercicio 6
+					metrics.set(METRIC_TIME_TAKEN, Duration.between(start, finish).toMillis());//Ejercicio 6
 					return asOptional(successor);
+				}
 			}
 		}
 		// if the frontier is empty then return failure
+		Instant finish = Instant.now(); //Ejercicio 6
+		metrics.set(METRIC_TIME_TAKEN, Duration.between(start, finish).toMillis());//Ejercicio 6
 		return Optional.empty();
 	}
 
@@ -93,12 +109,13 @@ public class TreeSearch<S, A> extends QueueSearch<S, A> {
 	 * Primitive operation which inserts the node at the tail of the frontier.
 	 */
 	protected void addToFrontier(Node<S, A> node) {
-		frontier.add(node);
-		updateMetrics(frontier.size());
+			frontier.add(node);
+			updateMetrics(frontier.size());
 	}
 
 	/**
-	 * Primitive operation which removes and returns the node at the head of the frontier.
+	 * Primitive operation which removes and returns the node at the head of the
+	 * frontier.
 	 *
 	 * @return the node at the head of the frontier.
 	 */
@@ -109,7 +126,8 @@ public class TreeSearch<S, A> extends QueueSearch<S, A> {
 	}
 
 	/**
-	 * Primitive operation which checks whether the frontier contains not yet expanded nodes.
+	 * Primitive operation which checks whether the frontier contains not yet
+	 * expanded nodes.
 	 */
 	protected boolean isFrontierEmpty() {
 		return frontier.isEmpty();

@@ -33,13 +33,13 @@ public class EightPuzzleDemo {
 
 	public static void main(String[] args) {
 		System.out.println("Initial State:\n" + boardWithThreeMoveSolution);
-		eightPuzzleDLSDemo();
-		eightPuzzleIDLSDemo();
-		eightPuzzleGreedyBestFirstDemo();
-		eightPuzzleGreedyBestFirstManhattanDemo();
+	//	eightPuzzleDLSDemo();
+	//	eightPuzzleIDLSDemo();
+	//	eightPuzzleGreedyBestFirstDemo();
+	//	eightPuzzleGreedyBestFirstManhattanDemo();
 		eightPuzzleAStarDemo();
 		eightPuzzleAStarManhattanDemo();
-		eightPuzzleSimulatedAnnealingDemo();
+		//eightPuzzleSimulatedAnnealingDemo();
 	}
 
 	private static void eightPuzzleDLSDemo() {
@@ -114,7 +114,7 @@ public class EightPuzzleDemo {
 	private static void eightPuzzleSimulatedAnnealingDemo() {
 		System.out.println("\nEightPuzzleDemo Simulated Annealing Search");
 		try {
-			Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(random1);
+			Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(boardWithThreeMoveSolution);
 			SimulatedAnnealingSearch<EightPuzzleBoard, Action> search = new SimulatedAnnealingSearch<>
 					(EightPuzzleFunctions::getManhattanDistance);
 			SearchAgent<Object, EightPuzzleBoard, Action> agent = new SearchAgent<>(problem, search);
@@ -146,5 +146,6 @@ public class EightPuzzleDemo {
 
 	private static void printActions(List<Action> actions) {
 		actions.forEach(System.out::println);
+		System.out.println("Number of Actions: " + actions.size()); //Ejercicio 4
 	}
 }
