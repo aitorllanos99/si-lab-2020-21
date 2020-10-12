@@ -38,7 +38,7 @@ public class EightPuzzleDemo {
 	//	eightPuzzleGreedyBestFirstDemo();
 	//	eightPuzzleGreedyBestFirstManhattanDemo();
 		eightPuzzleAStarDemo();
-		//eightPuzzleAStarManhattanDemo();
+		eightPuzzleAStarManhattanDemo();
 		//eightPuzzleSimulatedAnnealingDemo();
 	}
 
@@ -114,7 +114,7 @@ public class EightPuzzleDemo {
 	private static void eightPuzzleSimulatedAnnealingDemo() {
 		System.out.println("\nEightPuzzleDemo Simulated Annealing Search");
 		try {
-			Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(random1);
+			Problem<EightPuzzleBoard, Action> problem = new BidirectionalEightPuzzleProblem(boardWithThreeMoveSolution);
 			SimulatedAnnealingSearch<EightPuzzleBoard, Action> search = new SimulatedAnnealingSearch<>
 					(EightPuzzleFunctions::getManhattanDistance);
 			SearchAgent<Object, EightPuzzleBoard, Action> agent = new SearchAgent<>(problem, search);
